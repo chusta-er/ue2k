@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "ue2k_firefox",
+  "version": "1.0",
+
+  "description": "Captures ed2k links for edition and download.",
+
+  "icons": {
+    "48": "icons/emule-icon_048.png",
+    "96": "icons/emule-icon_096.png"
+  },
+
+  "permissions": [
+    "activeTab"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/emule-icon_032.png",
+    "default_title": "ue2k",
+    "default_popup": "popup/ue2k_popup_firefox.html"
+  },
+
+  "web_accessible_resources": [
+    "beasts/frog.jpg",
+    "beasts/turtle.jpg",
+    "beasts/snake.jpg"
+  ]
+}
