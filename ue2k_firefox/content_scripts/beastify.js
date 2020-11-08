@@ -1,42 +1,41 @@
+// IDEA: parts of this script were wirtten/debugged in test_e2k.html
+
 (function() {
-  /**
-   * Check and set a global guard variable.
-   * If this content script is injected into the same page again,
-   * it will do nothing next time.
-   */
-  if (window.hasRun) {
-    return;
-  }
-  window.hasRun = true;
-
-  /**
-   * Given a URL to a beast image, remove all existing beasts, then
-   * create and style an IMG node pointing to
-   * that image, then insert the node into the document.
-   */
-  function insertBeast(beastURL) {
-    removeExistingBeasts();
-    let beastImage = document.createElement("img");
-    beastImage.setAttribute("src", beastURL);
-    beastImage.style.height = "100vh";
-    beastImage.className = "beastify-image";
-    document.body.appendChild(beastImage);
-  }
-
-  /**
-   * Remove every beast from the page.
-   */
-  function removeExistingBeasts() {
-    let existingBeasts = document.querySelectorAll(".beastify-image");
-    for (let beast of existingBeasts) {
-      beast.remove();
+    /**
+     * Check and set a global guard variable.
+     * If this content script is injected into the same page again,
+     * it will do nothing next time.
+     */
+    if (window.hasRun) {
+        return;
     }
-  }
+    window.hasRun = true;
+
+    
+    function get_links() {
+        regexp = /ed2k\:\/\/\|file\|[^\|]+\|\d+\|[A-Fa-f0-9]{32}\|\//g;
+        array = [...document.documentElement.innerHTML.matchAll(regexp)];
+        console.log('links:', array);
+    }
+    
+    function get_links() {
+        regexp = /ed2k\:\/\/\|file\|[^\|]+\|\d+\|[A-Fa-f0-9]{32}\|\//g;
+        ed2k_links = [...document.documentElement.innerHTML.matchAll(regexp)]
+                        // extract firsts elemets of the association returned by matchAll:
+                        .map( function(element){return element[0];} );
+        console.log('links:', ed2k_links);
+    }
+    get_links();
+    
+    // Create an observer instance linked to the callback function
+    observer = new MutationObserver(get_links);
+
+    // Start observing the target node for configured mutations
+    observer.observe(document.documentElement, { childList: true, subtree: true });
 
   /**
    * Listen for messages from the background script.
    * Call "beastify()" or "reset()".
-  */
   browser.runtime.onMessage.addListener((message) => {
     if (message.command === "beastify") {
       insertBeast(message.beastURL);
@@ -44,5 +43,6 @@
       removeExistingBeasts();
     }
   });
+  */
 
 })();

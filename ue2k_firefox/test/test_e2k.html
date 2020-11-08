@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ed2k linker</title>
+    <style>
+        textarea {
+            resize: none;
+        }
+    </style>
+    <script type="text/javascript">
+        function Download() {
+            // alert("se va a hacer document.location=...");
+            document.location="web+ed2k://|file|Serenity.(Spanish.English.Subs).UHD.4K.HEVC-AC3.by.Geot.mkv|5477002789|703C0A91D9FC2BBAADDDD7A7638CDDE4|/";
+        }
+
+        function get_links() {
+            regexp = /ed2k\:\/\/\|file\|[^\|]+\|\d+\|[A-Fa-f0-9]{32}\|\//g;
+            ed2k_links = [...document.documentElement.innerHTML.matchAll(regexp)]
+                            // extract firsts elemets of the association returned by matchAll:
+                            .map( function(element){return element[0];} );
+            document.getElementById("links_viewer").innerHTML = ed2k_links.toString().replace(',', '\n');
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <a href="ed2k://|file|Serenity.(2005).(Spanish.English.Spanishsub).BDrip.1080p.x264-DTS-AC3.by.mokesky.(filibusteros.com).mkv|5521225338|A35E4F3EBBE4A0CEDE6C743720040C6F|/">
+        <p>Serenity BDrip 1080p x264 DTS AC3</p>
+        </a>
+    </div>
+    <div>
+        <a href="javascript:Download()">
+        <p>Serenity UHD 4K HEVC AC3</p>
+        </a>
+    </div>
+    <div>
+        <a href="ed2k://kk_de_la_vaca/">
+        <p>kk_de_la_vaca</p>
+        </a>
+    </div>
+    <div>
+        <button type="button" onclick="get_links()">Print e2k links in console</button>
+        <p/>
+        <textarea id="links_viewer" cols="100" rows="5" wrap="off">Yepa.</textarea>
+        
+    </div>
+</body>
+</html>
+
+
