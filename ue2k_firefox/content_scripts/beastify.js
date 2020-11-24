@@ -11,13 +11,6 @@
     }
     window.hasRun = true;
 
-    
-    function get_links() {
-        regexp = /ed2k\:\/\/\|file\|[^\|]+\|\d+\|[A-Fa-f0-9]{32}\|\//g;
-        array = [...document.documentElement.innerHTML.matchAll(regexp)];
-        console.log('links:', array);
-    }
-    
     function get_links() {
         regexp = /ed2k\:\/\/\|file\|[^\|]+\|\d+\|[A-Fa-f0-9]{32}\|\//g;
         ed2k_links = [...document.documentElement.innerHTML.matchAll(regexp)]
